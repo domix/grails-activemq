@@ -29,13 +29,13 @@ Plugin to integrate ActiveMQ in a Grails application.
 			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61616'))]
 		}
 
-		jmsFactory(ActiveMQConnectionFactory) {
+		connectionFactory(ActiveMQConnectionFactory) {
 			brokerURL = 'vm://localhost'
 		}
 
 		jmsTemplate(JmsTemplate) {
 			connectionFactory =  { SingleConnectionFactory cf ->
-				targetConnectionFactory = ref('jmsFactory')
+				targetConnectionFactory = ref('connectionFactory')
 			}
 		}
 		
