@@ -5,7 +5,5 @@
   <description>Plugin to integrate ActiveMQ in a Grails application.
 </description>
   <documentation>http://grails.org/Activemq+Plugin</documentation>
-  <resources>
-    <resource>spring.activemq</resource>
-  </resources>
+  <resources />
 </plugin>
