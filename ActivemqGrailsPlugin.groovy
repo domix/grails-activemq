@@ -23,11 +23,10 @@ Plugin to integrate ActiveMQ in a Grails application.
     def documentation = "http://grails.org/Activemq+Plugin"
 
     def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
 		jmsBroker(XBeanBrokerService) {
 			useJmx = 'false'
 			persistent = 'false'
-			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:0'))]
+			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61616'))]
 		}
 
 		jmsFactory(ActiveMQConnectionFactory) {
@@ -39,6 +38,7 @@ Plugin to integrate ActiveMQ in a Grails application.
 				targetConnectionFactory = ref('jmsFactory')
 			}
 		}
+		
     }
    
     def doWithApplicationContext = { applicationContext ->
