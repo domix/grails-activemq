@@ -2,7 +2,7 @@
   <author>Domingo Suarez Torres</author>
   <authorEmail>domingo.suarez@gmail.com</authorEmail>
   <title>Grails Activemq Plugin</title>
-  <description>Grails plugin to integrate ActiveMQ.
+  <description>Plugin to integrate ActiveMQ in a Grails application.
 </description>
   <documentation>http://grails.org/Activemq+Plugin</documentation>
   <resources>
