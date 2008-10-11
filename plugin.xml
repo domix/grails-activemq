@@ -1,4 +1,4 @@
-<plugin name='activemq' version='0.1'>
+<plugin name='activemq' version='0.0'>
   <author>Domingo Suarez Torres</author>
   <authorEmail>domingo.suarez@gmail.com</authorEmail>
   <title>Grails Activemq Plugin</title>

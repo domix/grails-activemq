@@ -23,7 +23,7 @@ import org.springframework.jms.connection.SingleConnectionFactory
 import org.springframework.jms.listener.DefaultMessageListenerContainer
 
 class ActivemqGrailsPlugin {
-    def version = 0.1
+    def version = 0.0
     def dependsOn = [:]
 
     // TODO Fill in these fields
