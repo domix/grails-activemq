@@ -35,7 +35,7 @@ Plugin to integrate ActiveMQ in a Grails application.
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/Activemq+Plugin"
+    def documentation = "http://grails.org.mx/ActiveMQ+Plugin"
 
     def doWithSpring = {
 		jmsBroker(XBeanBrokerService) {

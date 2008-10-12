@@ -1,0 +1,71 @@
+Note:
+
+The official documentation is locate at: http://www.grails.org.mx/ActiveMQ+Plugin
+
+
+grails-activemq is a plugin to embedded in a Grails application ActiveMQ for messaging. This release is very simple, in futures releases we provide mayor support for ActiveMQ advanced configuration.
+
+This plugin can be used in conjuntion with jms plugin to develop MDP (Message Driven Pogos).
+
+==Code==
+Plugin code is located at GitHub: http://github.com/domix/grails-activemq/tree/master
+If you wish to contribute, feel free to get a GitHub Account, fork the code, do your hacks and pull request.
+
+
+==Authors==
+
+* Domingo Suarez Torres
+
+==Installation==
+'grails install-plugin activemq'
+
+Recomended aditional configuration:
+'grails install-plugin jms'
+
+==Configuration==
+Out of the box the plugin is fully configured to run in the local Grails application VM at port 61616. Be aware of port availability in your system. In a future release, we provide a configuration to change the port and other setting at convenience.
+
+
+==Mini tutotial==
+Run or deploy your application in your Servlet Container. The plugin configures 3 beans in the application context:
+
+* jmsBroker: ActiveMQ itself
+* connectionFactory: a Connection Factory to JMS Broker
+* jmsTemplate: the Spring Template to send and receive messages
+
+If you already installed the jms plugin, then you can do this:
+
+In resources.groovy, add a ActiveMQ Queue:
+
+
+==Mini Tutorial==
+
+Follow this simple steps:
+
+1. grails create-app demoActiveMQ
+2. cd demoActiveMQ
+3. grails install-plugin activemq
+4. grails install-plugin jms
+5. grails create-controller notification
+6. Edit NotificationController to this:
+	class NotificationController {
+		def index = {
+			def message = "Hi, this is a Hello World with JMS & ActiveMQ, " + new Date()
+			sendJMSMessage("queue.notification", message)
+			render message
+		}
+	}
+7. grails create-service onNotification
+8. Edit OnNotificationService to this:
+	class OnNotificationService {
+		boolean transactional = false
+		static expose = ['jms']
+		static destination = "queue.notification"
+
+		def onMessage = {
+			println "GOT MESSAGE: $it"
+		}
+	}
+9. grails run-app
+10. Browse to: http://localhost:8080/demoActiveMQ/notification
+11. See result on console.
