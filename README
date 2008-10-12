@@ -26,16 +26,11 @@ Recomended aditional configuration:
 Out of the box the plugin is fully configured to run in the local Grails application VM at port 61616. Be aware of port availability in your system. In a future release, we provide a configuration to change the port and other setting at convenience.
 
 
-==Mini tutotial==
-Run or deploy your application in your Servlet Container. The plugin configures 3 beans in the application context:
+==Out Of The Box Spring Beans==
 
 * jmsBroker: ActiveMQ itself
 * connectionFactory: a Connection Factory to JMS Broker
 * jmsTemplate: the Spring Template to send and receive messages
-
-If you already installed the jms plugin, then you can do this:
-
-In resources.groovy, add a ActiveMQ Queue:
 
 
 ==Mini Tutorial==
