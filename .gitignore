@@ -1,3 +1,9 @@
 .svn
 *.zip
 stacktrace.log
+target
+docsgrails-app/conf/UrlMappings.groovy
+grails-app/i18n/
+web-app/css/
+web-app/images/
+web-app/js/

@@ -22,9 +22,12 @@ import org.springframework.jms.core.JmsTemplate
 import org.springframework.jms.connection.SingleConnectionFactory
 import org.springframework.jms.listener.DefaultMessageListenerContainer
 
+import org.codehaus.groovy.grails.plugins.activemq.*
+
 class ActivemqGrailsPlugin {
-    def version = 0.0
+    def version = 0.2
     def dependsOn = [:]
+	def grailsVersion = "1.2 > *"
 
     // TODO Fill in these fields
     def author = "Domingo Suarez Torres"
@@ -35,24 +38,30 @@ Plugin to integrate ActiveMQ in a Grails application.
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org.mx/ActiveMQ+Plugin"
+    def documentation = "http://grails.org/plugin/activemq"
 
     def doWithSpring = {
+		def conf = ActiveMQUtils.securityConfig
+		if (!conf || !conf.active) {
+			println '\n\nActiveMQ Embedded is disabled, not loading\n\n'
+			return
+		}
+
+		println '\nActiveMQ Embedded...'
+		
 		jmsBroker(XBeanBrokerService) {
-			useJmx = 'false'
-			persistent = 'false'
-			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61616'))]
+			useJmx = conf.useJmx
+			persistent = conf.persistent
+			transportConnectors = [new TransportConnector(uri: new URI("tcp://localhost:${conf.port}"))]
 		}
+		
+		jmsConnectionFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+		     brokerURL = 'vm://localhost'
+		  }
 
-		connectionFactory(ActiveMQConnectionFactory) {
-			brokerURL = 'vm://localhost'
-		}
-
-		jmsTemplate(JmsTemplate) {
-			connectionFactory =  { SingleConnectionFactory cf ->
-				targetConnectionFactory = ref('connectionFactory')
-			}
-		}
+		  defaultJmsTemplate(org.springframework.jms.core.JmsTemplate) {
+		     connectionFactory = ref("jmsConnectionFactory")
+		  }
 		
     }
    
