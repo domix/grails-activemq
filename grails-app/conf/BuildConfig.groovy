@@ -29,6 +29,8 @@ grails.project.dependency.resolution = {
 
 	dependencies {
 		//compile("javax.jms:jms:1.1")
-		compile("org.apache.activemq:activemq-core:5.4.2")
+		compile("org.apache.activemq:activemq-core:5.4.2") {
+			excludes "spring-context"
+		}
 	}
 }
