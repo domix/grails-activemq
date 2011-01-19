@@ -17,20 +17,29 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.dependency.resolution = {
-	inherits( "global" )
-	log "warn"
-	repositories {
-		grailsPlugins()
-		grailsHome()
-		mavenCentral()
-		mavenRepo "http://download.java.net/maven/2/"
-		mavenRepo "http://repository.jboss.org/nexus/content/groups/public-jboss/"
-	}
+  inherits("global")
+  log "warn"
+  repositories {
+    grailsPlugins()
+    grailsHome()
+    mavenCentral()
+    mavenRepo "http://download.java.net/maven/2/"
+    mavenRepo "http://repository.jboss.org/nexus/content/groups/public-jboss/"
+  }
 
-	dependencies {
-		//compile("javax.jms:jms:1.1")
-		compile("org.apache.activemq:activemq-core:5.4.2") {
-			excludes "spring-context"
-		}
-	}
+  dependencies {
+    compile("org.apache.activemq:activemq-core:5.4.2") {
+      transitive = false
+    }
+    compile("org.apache.activemq:kahadb:5.4.2") {
+      transitive = false
+    }
+    compile("org.apache.activemq.protobuf:activemq-protobuf:1.1") {
+      transitive = false
+    }
+    compile("org.apache.activemq:activeio-core:3.1.2") {
+      transitive = false
+    }
+    compile "org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1"
+  }
 }

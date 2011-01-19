@@ -9,3 +9,5 @@ web-app/images/
 web-app/js/
 docs/
 grails-app/conf/UrlMappings.groovy
+.idea/
+*.iml

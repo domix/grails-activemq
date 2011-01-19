@@ -24,49 +24,50 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
  */
 class ReflectionUtils {
 
-	private ReflectionUtils() {
-		// static only
-	}
+  private ReflectionUtils() {
+    // static only
+  }
 
-	static getConfigProperty(String name) {
-		def value = ActiveMQUtils.securityConfig
-		for (String part in name.split('\\.')) {
-			value = value."$part"
-		}
-		value
-	}
+  static getConfigProperty(String name) {
+    def value = ActiveMQUtils.config
+    for (String part in name.split('\\.')) {
+      value = value."$part"
+    }
+    value
+  }
 
-	static void setConfigProperty(String name, value) {
-		def config = ActiveMQUtils.securityConfig
-		def parts = name.split('\\.') as List
-		name = parts.remove(parts.size() - 1)
+  static void setConfigProperty(String name, value) {
+    def config = ActiveMQUtils.config
+    def parts = name.split('\\.') as List
+    name = parts.remove(parts.size() - 1)
 
-		for (String part in parts) {
-			config = config."$part"
-		}
+    for (String part in parts) {
+      config = config."$part"
+    }
 
-		config."$name" = value
-	}
+    config."$name" = value
+  }
 
-	static List asList(o) { o ? o as List : [] }
+  static List asList(o) { o ? o as List : [] }
 
-	static ConfigObject getSecurityConfig() { CH.config.grails.plugins.activemq }
-	static void setSecurityConfig(ConfigObject c) { CH.config.grails.plugins.activemq = c }
+  static ConfigObject getConfig() { CH.config.grails.plugins.activemq }
 
-	static Map<String, List<String>> splitMap(Map<String, Object> m) {
-		Map<String, List<String>> split = [:]
-		m.each { String key, value ->
-			if (value instanceof List<?> || value.getClass().array) {
-				split[key] = value*.toString()
-			}
-			else { // String/GString
-				split[key] = [value.toString()]
-			}
-		}
-		split
-	}
+  static void setConfig(ConfigObject c) { CH.config.grails.plugins.activemq = c }
 
-	private static lookupPropertyValue(o, String name) {
-		o."${getConfigProperty(name)}"
-	}
+  static Map<String, List<String>> splitMap(Map<String, Object> m) {
+    Map<String, List<String>> split = [:]
+    m.each { String key, value ->
+      if (value instanceof List<?> || value.getClass().array) {
+        split[key] = value*.toString()
+      }
+      else { // String/GString
+        split[key] = [value.toString()]
+      }
+    }
+    split
+  }
+
+  private static lookupPropertyValue(o, String name) {
+    o."${getConfigProperty(name)}"
+  }
 }

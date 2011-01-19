@@ -13,78 +13,68 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.apache.activemq.ActiveMQConnectionFactory
-import org.apache.activemq.broker.TransportConnector
-import org.apache.activemq.command.ActiveMQQueue
-import org.apache.activemq.xbean.XBeanBrokerService
-
-import org.springframework.jms.core.JmsTemplate
-import org.springframework.jms.connection.SingleConnectionFactory
-import org.springframework.jms.listener.DefaultMessageListenerContainer
-
-import org.codehaus.groovy.grails.plugins.activemq.*
 
 class ActivemqGrailsPlugin {
-    def version = 0.2
-    def dependsOn = [:]
-	def grailsVersion = "1.2 > *"
+  def version = "0.2.1" // added by set-version
+  def dependsOn = [:]
+  def grailsVersion = "1.2 > *"
 
-    // TODO Fill in these fields
-    def author = "Domingo Suarez Torres"
-    def authorEmail = "domingo.suarez@gmail.com"
-    def title = "Grails Activemq Plugin"
-    def description = '''\
+  // TODO Fill in these fields
+  def author = "Domingo Suarez Torres"
+  def authorEmail = "domingo.suarez@gmail.com"
+  def title = "Grails ActiveMQ Plugin"
+  def description = '''\
 Plugin to integrate ActiveMQ in a Grails application.
 '''
 
-    // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/activemq"
+  // URL to the plugin's documentation
+  def documentation = "http://grails.org/plugin/activemq"
 
-    def doWithSpring = {
-		def conf = ActiveMQUtils.securityConfig
-		if (!conf || !conf.active) {
-			println '\n\nActiveMQ Embedded is disabled, not loading\n\n'
-			return
-		}
-
-		println '\nActiveMQ Embedded...'
-		
-		jmsBroker(XBeanBrokerService) {
-			useJmx = conf.useJmx
-			persistent = conf.persistent
-			transportConnectors = [new TransportConnector(uri: new URI("tcp://localhost:${conf.port}"))]
-		}
-		
-		jmsConnectionFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-		     brokerURL = 'vm://localhost'
-		  }
-
-		  defaultJmsTemplate(org.springframework.jms.core.JmsTemplate) {
-		     connectionFactory = ref("jmsConnectionFactory")
-		  }
-		
-    }
-   
-    def doWithApplicationContext = { applicationContext ->
-        // TODO Implement post initialization spring config (optional)		
+  def doWithSpring = {
+    def conf = org.codehaus.groovy.grails.plugins.activemq.ActiveMQUtils.config
+    if (!conf || !conf.active) {
+      println '\n\nActiveMQ Embedded is disabled, not loading\n\n'
+      return
     }
 
-    def doWithWebDescriptor = { xml ->
-        // TODO Implement additions to web.xml (optional)
-    }
-	                                      
-    def doWithDynamicMethods = { ctx ->
-        // TODO Implement registering dynamic methods to classes (optional)
-    }
-	
-    def onChange = { event ->
-        // TODO Implement code that is executed when any artefact that this plugin is
-        // watching is modified and reloaded. The event contains: event.source,
-        // event.application, event.manager, event.ctx, and event.plugin.
+    println '\nActiveMQ Embedded...'
+
+    jmsBroker(org.apache.activemq.xbean.XBeanBrokerService) {
+      useJmx = conf.useJmx
+      persistent = conf.persistent
+      transportConnectors = [new org.apache.activemq.broker.TransportConnector(uri: new URI("tcp://localhost:${conf.port}"))]
     }
 
-    def onConfigChange = { event ->
-        // TODO Implement code that is executed when the project configuration changes.
-        // The event is the same as for 'onChange'.
+    jmsConnectionFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+      brokerURL = 'vm://localhost'
     }
+
+    defaultJmsTemplate(org.springframework.jms.core.JmsTemplate) {
+      connectionFactory = ref("jmsConnectionFactory")
+    }
+
+  }
+
+  def doWithApplicationContext = { applicationContext ->
+    // TODO Implement post initialization spring config (optional)
+  }
+
+  def doWithWebDescriptor = { xml ->
+    // TODO Implement additions to web.xml (optional)
+  }
+
+  def doWithDynamicMethods = { ctx ->
+    // TODO Implement registering dynamic methods to classes (optional)
+  }
+
+  def onChange = { event ->
+    // TODO Implement code that is executed when any artefact that this plugin is
+    // watching is modified and reloaded. The event contains: event.source,
+    // event.application, event.manager, event.ctx, and event.plugin.
+  }
+
+  def onConfigChange = { event ->
+    // TODO Implement code that is executed when the project configuration changes.
+    // The event is the same as for 'onChange'.
+  }
 }
