@@ -41,5 +41,6 @@ grails.project.dependency.resolution = {
       transitive = false
     }
     compile "org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1"
+    compile "org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1"
   }
 }
