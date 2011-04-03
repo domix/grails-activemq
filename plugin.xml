@@ -1,9 +1,8 @@
-<plugin name='activemq' version='0.2.1' grailsVersion='1.2 &gt; *'>
+<plugin name='activemq' version='0.3' grailsVersion='1.2 &gt; *'>
   <author>Domingo Suarez Torres</author>
   <authorEmail>domingo.suarez@gmail.com</authorEmail>
   <title>Grails ActiveMQ Plugin</title>
-  <description>Plugin to integrate ActiveMQ in a Grails application.
-</description>
+  <description>Plugin to integrate ActiveMQ in a Grails application.</description>
   <documentation>http://grails.org/plugin/activemq</documentation>
   <resources>
     <resource>BuildConfig</resource>

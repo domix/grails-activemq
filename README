@@ -1,6 +1,6 @@
 Note:
 
-The official documentation is locate at: http://www.grails.org.mx/ActiveMQ+Plugin
+The official documentation is locate at: http://grails.org/plugin/activemq
 
 
 grails-activemq is a plugin to embedded in a Grails application ActiveMQ for messaging. This release is very simple, in futures releases we provide mayor support for ActiveMQ advanced configuration.
@@ -8,7 +8,7 @@ grails-activemq is a plugin to embedded in a Grails application ActiveMQ for mes
 This plugin can be used in conjuntion with jms plugin to develop MDP (Message Driven Pogos).
 
 ==Code==
-Plugin code is located at GitHub: http://github.com/domix/grails-activemq/tree/master
+Plugin code is located at GitHub: http://github.com/domix/grails-activemq
 If you wish to contribute, feel free to get a GitHub Account, fork the code, do your hacks and pull request.
 
 
@@ -54,11 +54,11 @@ Follow this simple steps:
 8. Edit OnNotificationService to this:
 	class OnNotificationService {
 		boolean transactional = false
-		static expose = ['jms']
+		static exposes = ['jms']
 		static destination = "queue.notification"
 
-		def onMessage = {
-			println "GOT MESSAGE: $it"
+		def onMessage(msg) {
+			println "GOT MESSAGE: $msg"
 		}
 	}
 9. grails run-app

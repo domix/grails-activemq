@@ -28,10 +28,10 @@ grails.project.dependency.resolution = {
   }
 
   dependencies {
-    compile("org.apache.activemq:activemq-core:5.4.2") {
+    compile("org.apache.activemq:activemq-core:5.5.0") {
       transitive = false
     }
-    compile("org.apache.activemq:kahadb:5.4.2") {
+    compile("org.apache.activemq:kahadb:5.5.0") {
       transitive = false
     }
     compile("org.apache.activemq.protobuf:activemq-protobuf:1.1") {

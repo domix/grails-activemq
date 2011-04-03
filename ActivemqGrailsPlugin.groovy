@@ -15,17 +15,13 @@
  */
 
 class ActivemqGrailsPlugin {
-  def version = "0.2.1" // added by set-version
-  def dependsOn = [:]
-  def grailsVersion = "1.2 > *"
+  String version = "0.3" // added by set-version
+  String grailsVersion = "1.2 > *"
 
-  // TODO Fill in these fields
   def author = "Domingo Suarez Torres"
   def authorEmail = "domingo.suarez@gmail.com"
   def title = "Grails ActiveMQ Plugin"
-  def description = '''\
-Plugin to integrate ActiveMQ in a Grails application.
-'''
+  def description = 'Plugin to integrate ActiveMQ in a Grails application.'
 
   // URL to the plugin's documentation
   def documentation = "http://grails.org/plugin/activemq"
@@ -45,8 +41,10 @@ Plugin to integrate ActiveMQ in a Grails application.
       transportConnectors = [new org.apache.activemq.broker.TransportConnector(uri: new URI("tcp://localhost:${conf.port}"))]
     }
 
-    jmsConnectionFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-      brokerURL = 'vm://localhost'
+    jmsConnectionFactory(org.springframework.jms.connection.SingleConnectionFactory) {
+	  targetConnectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+        brokerURL = 'vm://localhost'
+      }
     }
 
     defaultJmsTemplate(org.springframework.jms.core.JmsTemplate) {
