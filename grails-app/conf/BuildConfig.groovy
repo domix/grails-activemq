@@ -16,6 +16,9 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+
+def activemqVersion = '5.6.0'
+
 grails.project.dependency.resolution = {
   inherits("global")
   log "warn"
@@ -28,16 +31,16 @@ grails.project.dependency.resolution = {
   }
 
   dependencies {
-    compile("org.apache.activemq:activemq-core:5.5.0") {
+    compile("org.apache.activemq:activemq-core:${activemqVersion}") {
       transitive = false
     }
-    compile("org.apache.activemq:kahadb:5.5.0") {
+    compile("org.apache.activemq:kahadb:$activemqVersion") {
       transitive = false
     }
     compile("org.apache.activemq.protobuf:activemq-protobuf:1.1") {
       transitive = false
     }
-    compile("org.apache.activemq:activeio-core:3.1.2") {
+    compile("org.apache.activemq:activeio-core:3.1.4") {
       transitive = false
     }
     compile "org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1"
