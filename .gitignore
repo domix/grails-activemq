@@ -2,12 +2,13 @@
 *.zip
 stacktrace.log
 target
-docsgrails-app/conf/UrlMappings.groovy
 grails-app/i18n/
 web-app
 docs/
 grails-app/conf/UrlMappings.groovy
 .idea/
-*.imlweb-app/
-trunk-grailsPlugins.iml
-trunk.iml
+*.iml
+*.ipr
+*.iws
+web-app/
+.gradle/
