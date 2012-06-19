@@ -1,4 +1,9 @@
 
+0.4.1 / 2012-06-19
+==================
+
+  * added plugin.xml to ignore list, removed web-app assets from the final bundle
+
 0.4 / 2012-06-19
 ==================
 
@@ -9,6 +14,8 @@
   * upgraded to ActiveMQ 5.6.0
 
 0.3 / 2011-04-03
+==================
+
   * work done for GPACTIVEMQ-3
   * added JMS specs jar, neccessary to release the plugin
   * delete unnecessary files
@@ -19,6 +26,8 @@
   * added licence file
 
 0.2 / 2011-01-15
+==================
+
   * Se parametrizo las siguientesopciones: active, port, useJmx y persistent
   * deleted unnecesary files
   * deleted unnecesary libraries
