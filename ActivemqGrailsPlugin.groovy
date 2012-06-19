@@ -15,8 +15,11 @@
  */
 
 class ActivemqGrailsPlugin {
-  String version = "0.3" // added by set-version
-  String grailsVersion = "1.2 > *"
+  def version = "0.3" // added by set-version
+  def grailsVersion = "1.2 > *"
+  def pluginExcludes = [
+      "grails-app/views/error.gsp"
+  ]
 
   def author = "Domingo Suarez Torres"
   def authorEmail = "domingo.suarez@gmail.com"
@@ -25,6 +28,11 @@ class ActivemqGrailsPlugin {
 
   // URL to the plugin's documentation
   def documentation = "http://grails.org/plugin/activemq"
+  
+  def license = "APACHE"
+  def organization = [ name: "Sindicato AHPM", url: "http://sindica.to/" ]
+  def issueManagement = [ system: "GITHUB", url: "https://github.com/domix/grails-activemq/issues" ]
+  def scm = [ url: "https://github.com/domix/grails-activemq" ]
 
   def doWithSpring = {
     def conf = org.codehaus.groovy.grails.plugins.activemq.ActiveMQUtils.config
