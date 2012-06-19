@@ -63,7 +63,8 @@ grails.project.dependency.resolution = {
           */
           if (grailsVersion.startsWith('2')) {
             build(":release:2.0.3") { export = false }
-            build ":tomcat:$grailsVersion"
+            build(":rest-client-builder:1.0.2") { export = false }
+            build(":tomcat:$grailsVersion") { export = false }
           }
     }
 }
