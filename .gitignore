@@ -12,3 +12,4 @@ grails-app/conf/UrlMappings.groovy
 *.iws
 web-app/
 .gradle/
+plugin.xml

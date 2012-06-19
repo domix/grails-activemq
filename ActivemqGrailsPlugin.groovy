@@ -18,7 +18,9 @@ class ActivemqGrailsPlugin {
   def version = "0.4" // added by set-version
   def grailsVersion = "1.2 > *"
   def pluginExcludes = [
-      "grails-app/views/error.gsp"
+    "grails-app/views/error.gsp",
+    "grails-app/i18n/**",
+    "web-app/**"
   ]
 
   def author = "Domingo Suarez Torres"
@@ -28,11 +30,11 @@ class ActivemqGrailsPlugin {
 
   // URL to the plugin's documentation
   def documentation = "http://grails.org/plugin/activemq"
-  
+
   def license = "APACHE"
-  def organization = [ name: "Sindicato AHPM", url: "http://sindica.to/" ]
-  def issueManagement = [ system: "GITHUB", url: "https://github.com/domix/grails-activemq/issues" ]
-  def scm = [ url: "https://github.com/domix/grails-activemq" ]
+  def organization = [name: "Sindicato AHPM", url: "http://sindica.to/"]
+  def issueManagement = [system: "GITHUB", url: "https://github.com/domix/grails-activemq/issues"]
+  def scm = [url: "https://github.com/domix/grails-activemq"]
 
   def doWithSpring = {
     def conf = org.codehaus.groovy.grails.plugins.activemq.ActiveMQUtils.config
@@ -50,7 +52,7 @@ class ActivemqGrailsPlugin {
     }
 
     jmsConnectionFactory(org.springframework.jms.connection.SingleConnectionFactory) {
-	  targetConnectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+      targetConnectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
         brokerURL = 'vm://localhost'
       }
     }
