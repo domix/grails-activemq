@@ -19,7 +19,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-def activemqVersion = '5.6.0'
+def activemqVersion = '5.7.0'
 
 grails.project.dependency.resolution = {
   // inherit Grails' default dependencies
@@ -62,7 +62,7 @@ grails.project.dependency.resolution = {
     I some Grails versions from 1.3.* the 'export = false' does not work. For Grails 2.* works properly
     */
     if (grailsVersion.startsWith('2')) {
-      build(":release:2.0.3") { export = false }
+      build(":release:2.0.4") { export = false }
       build(":rest-client-builder:1.0.2") { export = false }
       build(":tomcat:$grailsVersion") { export = false }
     }
