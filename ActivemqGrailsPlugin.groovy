@@ -16,7 +16,7 @@
 
 class ActivemqGrailsPlugin {
   def version = "0.4.2" // added by set-version
-  def grailsVersion = "1.2 > *"
+  def grailsVersion = "2.0.0 > *"
   def pluginExcludes = [
     "grails-app/views/error.gsp",
     "grails-app/i18n/**",
@@ -37,7 +37,7 @@ class ActivemqGrailsPlugin {
   def scm = [url: "https://github.com/domix/grails-activemq"]
 
   def doWithSpring = {
-    def conf = org.codehaus.groovy.grails.plugins.activemq.ActiveMQUtils.config
+    def conf = application.config.grails.activemq ?: [:]
     if (!conf || !conf.active) {
       println '\n\nActiveMQ Embedded is disabled, not loading\n\n'
       return
@@ -46,9 +46,10 @@ class ActivemqGrailsPlugin {
     println '\nActiveMQ Embedded...'
 
     jmsBroker(org.apache.activemq.xbean.XBeanBrokerService) {
-      useJmx = conf.useJmx
-      persistent = conf.persistent
-      transportConnectors = [new org.apache.activemq.broker.TransportConnector(uri: new URI("tcp://localhost:${conf.port}"))]
+      useJmx = conf?.useJmx ?: true
+      persistent = conf?.persistent ?: true
+      def port = conf?.port ?: 61616
+      transportConnectors = [new org.apache.activemq.broker.TransportConnector(uri: new URI("tcp://localhost:${port}"))]
     }
 
     jmsConnectionFactory(org.springframework.jms.connection.SingleConnectionFactory) {
