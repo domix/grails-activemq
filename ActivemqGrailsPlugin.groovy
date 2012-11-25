@@ -15,7 +15,7 @@
  */
 
 class ActivemqGrailsPlugin {
-  def version = "0.4.1" // added by set-version
+  def version = "0.4.2" // added by set-version
   def grailsVersion = "1.2 > *"
   def pluginExcludes = [
     "grails-app/views/error.gsp",
