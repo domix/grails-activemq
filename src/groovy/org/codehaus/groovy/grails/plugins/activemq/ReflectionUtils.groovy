@@ -13,9 +13,7 @@
  * limitations under the License.
  */
 package org.codehaus.groovy.grails.plugins.activemq
-
-import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
-import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
+import grails.util.Holders
 
 /**
  * Helper methods in Groovy.
@@ -50,9 +48,9 @@ class ReflectionUtils {
 
   static List asList(o) { o ? o as List : [] }
 
-  static ConfigObject getConfig() { CH.config.grails.plugins.activemq }
+  static ConfigObject getConfig() { Holders.config.grails.plugins.activemq }
 
-  static void setConfig(ConfigObject c) { CH.config.grails.plugins.activemq = c }
+  static void setConfig(ConfigObject c) { Holders.config.grails.plugins.activemq = c }
 
   static Map<String, List<String>> splitMap(Map<String, Object> m) {
     Map<String, List<String>> split = [:]
