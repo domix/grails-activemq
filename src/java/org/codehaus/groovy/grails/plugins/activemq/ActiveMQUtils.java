@@ -19,8 +19,7 @@ import grails.util.Environment;
 import groovy.lang.GroovyClassLoader;
 import groovy.util.ConfigObject;
 import groovy.util.ConfigSlurper;
-import org.codehaus.groovy.grails.commons.ApplicationHolder;
-
+import grails.util.Holders;
 /**
  * Helper methods.
  */
@@ -113,6 +112,6 @@ public final class ActiveMQUtils {
 
   @SuppressWarnings("unchecked")
   private static <T> T getBean(final String name) {
-    return (T) ApplicationHolder.getApplication().getMainContext().getBean(name);
+    return (T)  Holders.getApplicationContext().getBean(name);
   }
 }
