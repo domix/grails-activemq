@@ -45,10 +45,24 @@ class ActivemqGrailsPlugin {
 
     println '\nActiveMQ Embedded...'
 
+    jmsTempUsage(org.apache.activemq.usage.TempUsage) {
+      limit = conf?.tempUsage?.limit ?: 64 * 1024 * 1024
+    }
+
+    jmsStoreUsage(org.apache.activemq.usage.StoreUsage) {
+      limit = conf?.storeUsage?.limit ?: 64 * 1024 * 1024
+    }
+
+    jmsSystemUsage(org.apache.activemq.usage.SystemUsage) {
+      tempUsage = ref("jmsTempUsage")
+      storeUsage = ref("jmsStoreUsage")
+    }
+
     jmsBroker(org.apache.activemq.xbean.XBeanBrokerService) {
       useJmx = conf?.useJmx ?: true
       persistent = conf?.persistent ?: true
       def port = conf?.port ?: 61616
+      systemUsage = ref("jmsSystemUsage")
       transportConnectors = [new org.apache.activemq.broker.TransportConnector(uri: new URI("tcp://localhost:${port}"))]
     }
 

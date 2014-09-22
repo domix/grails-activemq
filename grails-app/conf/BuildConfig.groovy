@@ -21,7 +21,9 @@ grails.project.target.level = 1.6
 
 def activemqVersion = '5.7.0'
 
+grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
+  legacyResolve true
   // inherit Grails' default dependencies
   inherits("global") {
     // uncomment to disable ehcache
@@ -31,10 +33,7 @@ grails.project.dependency.resolution = {
   repositories {
     mavenLocal()
     mavenCentral()
-    grailsPlugins()
-    grailsHome()
     grailsCentral()
-    grailsRepo "http://grails.org/plugins"
     mavenRepo "http://repo.grails.org/grails/plugins"
     mavenRepo "http://download.java.net/maven/2/"
     mavenRepo "http://repository.jboss.org/nexus/content/groups/public-jboss/"
@@ -57,9 +56,10 @@ grails.project.dependency.resolution = {
   }
 
   plugins {
-      build(":release:2.1.0") { export = false }
-      build(":rest-client-builder:1.0.2") { export = false }
-      build(":tomcat:$grailsVersion") { export = false }
+      build(":release:3.0.1",
+              ":rest-client-builder:1.0.3") {
+          export = false
+      }
   }
 }
 
