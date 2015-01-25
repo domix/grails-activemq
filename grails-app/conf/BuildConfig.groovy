@@ -16,7 +16,7 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
-grails.project.target.level = 1.6
+grails.project.target.level = 1.7
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 def activemqVersion = '5.7.0'
@@ -39,20 +39,8 @@ grails.project.dependency.resolution = {
     mavenRepo "http://repository.jboss.org/nexus/content/groups/public-jboss/"
   }
   dependencies {
-    compile("org.apache.activemq:activemq-core:$activemqVersion") {
-      transitive = false
-    }
-    compile("org.apache.activemq:kahadb:$activemqVersion") {
-      transitive = false
-    }
-    compile("org.apache.activemq.protobuf:activemq-protobuf:1.1") {
-      transitive = false
-    }
-    compile("org.apache.activemq:activeio-core:3.1.4") {
-      transitive = false
-    }
-    compile "org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1"
-    compile "org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1"
+    compile 'org.apache.activemq:activemq-spring:5.10.1'
+    compile 'org.springframework:spring-jms:4.0.7.RELEASE'
   }
 
   plugins {

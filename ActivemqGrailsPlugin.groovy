@@ -15,7 +15,7 @@
  */
 
 class ActivemqGrailsPlugin {
-  def version = "0.4.2" // added by set-version
+  def version = "0.5" // added by set-version
   def grailsVersion = "2.0.0 > *"
   def pluginExcludes = [
     "grails-app/views/error.gsp",
@@ -32,48 +32,21 @@ class ActivemqGrailsPlugin {
   def documentation = "http://grails.org/plugin/activemq"
 
   def license = "APACHE"
-  def organization = [name: "Sindicato AHPM", url: "http://sindica.to/"]
+  def organization = [name: "Sindicato Source", url: "http://sindica.to/"]
   def issueManagement = [system: "GITHUB", url: "https://github.com/domix/grails-activemq/issues"]
   def scm = [url: "https://github.com/domix/grails-activemq"]
 
   def doWithSpring = {
+
     def conf = application.config.grails.activemq ?: [:]
     if (!conf || !conf.active) {
       println '\n\nActiveMQ Embedded is disabled, not loading\n\n'
       return
     }
 
-    println '\nActiveMQ Embedded...'
+    xmlns context: 'http://www.springframework.org/schema/context'
+    context.'component-scan'('base-package': 'com.domingosuarez.grails.plugin.activemq')
 
-    jmsTempUsage(org.apache.activemq.usage.TempUsage) {
-      limit = conf?.tempUsage?.limit ?: 64 * 1024 * 1024
-    }
-
-    jmsStoreUsage(org.apache.activemq.usage.StoreUsage) {
-      limit = conf?.storeUsage?.limit ?: 64 * 1024 * 1024
-    }
-
-    jmsSystemUsage(org.apache.activemq.usage.SystemUsage) {
-      tempUsage = ref("jmsTempUsage")
-      storeUsage = ref("jmsStoreUsage")
-    }
-
-    jmsBroker(org.apache.activemq.xbean.XBeanBrokerService) {
-      useJmx = conf?.useJmx ?: true
-      persistent = conf?.persistent ?: true
-      def port = conf?.port ?: 61616
-      systemUsage = ref("jmsSystemUsage")
-      transportConnectors = [new org.apache.activemq.broker.TransportConnector(uri: new URI("tcp://localhost:${port}"))]
-    }
-
-    jmsConnectionFactory(org.springframework.jms.connection.SingleConnectionFactory) {
-      targetConnectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
-        brokerURL = 'vm://localhost'
-      }
-    }
-
-    defaultJmsTemplate(org.springframework.jms.core.JmsTemplate) {
-      connectionFactory = ref("jmsConnectionFactory")
-    }
+    
   }
 }
