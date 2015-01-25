@@ -1,4 +1,14 @@
 
+0.5 / 2015-01-25
+==================
+
+  * added configuration with Spring Java config, upgraded to latest ActiveMQ, deleted unused classes
+  * Fixed dependencies resolution in BuildConfig so it properly does a maven-install with grails 2.4.2 Added configurable tempUsage.limit and storeUsage.limit, and set default for both to 64Mb
+  * Upgrading to grails 2.4.4
+  * Update ReflectionUtils
+  * setting Grails minimun version to 2.0.0, improved config handling, removed useless code
+  * upgrade ActiveMQ libraries to 5.10.0
+
 0.4.1 / 2012-06-19
 ==================
 
